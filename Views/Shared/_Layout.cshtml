@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PARADIGMASFINAL</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PARADIGMASFINAL.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="..." crossorigin="anonymous" />
+
+    <style>
+        /* Estilo para toda la barra */
+        .navbar {
+            background: linear-gradient(to right, #AE2D68, #280659);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* Contenedor interno de la navbar */
+        .navbar-container {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Espaciador izquierdo (para centrar el título) */
+        .navbar-spacer {
+            flex: 1;
+        }
+
+        /* Título centrado */
+        .titulo {
+            color: honeydew !important;
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            flex: 1;
+           
+        }
+
+        /* Menú central */
+        .navbar-menu {
+            position: absolute;
+            left: 70%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Menú de usuario */
+        .navbar-user {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        a{color:white !important}
+
+        /* Enlaces */
+        .enlace-nav {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .puntos{
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+            .enlace-nav:hover {
+            color: white !important;
+            }
+
+            .enlace-nav::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: white;
+                transition: width 0.3s ease;
+            }
+
+            .enlace-nav:hover::after {
+                width: 100%;
+            }
+
+            /* Íconos */
+            .enlace-nav i {
+                font-size: 1.1rem;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <!-- Lado izquierdo vacío para centrar el título -->
+                <div class="navbar-spacer"></div>
+
+                <!-- Título centrado -->
+                <a class="titulo" href="/">.NETflix</a>
+
+                <!-- Menú central -->
+                <div class="navbar-menu">
+                    <a class="enlace-nav" href="/peliculas">PELICULAS</a>
+                    <a class="enlace-nav" href="/Home/Puntos">SERIES</a>
+                    <a class="enlace-nav" href="/Home/Puntos">JUEGOS</a>
+                </div>
+
+                <!-- Menú usuario -->
+                <div class="navbar-user">
+                    <a class="enlace-nav" href="/">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <span class="puntos">
+                        <i class="fas fa-fire"></i> Puntos
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

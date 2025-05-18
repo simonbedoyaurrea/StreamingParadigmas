@@ -1,0 +1,122 @@
+﻿@model streamingParadigmas.Clases.Pelicula;
+
+<style>
+    .descripcion-container {
+        background-color: transparent;
+        color: white;
+        display: flex;
+        justify-content:space-between;
+        padding: 2rem;
+        border-radius: 15px;
+        position: relative;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        width:95%;
+        height:50vh;
+        margin:20px auto;
+    }
+
+    .back-arrow {
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        color: #00ff99;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+
+    .left-panel {
+        position: relative;
+        width: 350px;
+        height:500px;
+        border-radius:20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color:antiquewhite;
+        margin-left:40px;
+
+
+
+
+    }
+
+    
+
+    .imagen-poster{
+        width:100%;
+        height:100%;
+        border-radius:20px;
+    }
+
+    .rating-circle {
+        position: absolute;
+        top: -10px;
+        right:-10px;
+       background-color: #00cc66; 
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 0 5px #00cc66;
+    }
+
+    .right-panel {
+        width: 50%;
+        padding-left: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background:black;
+        align-items:center
+    }
+
+    .movie-title {
+        color: #00ff99;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .movie-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .ver-button {
+        background-color: #00cc88;
+        padding: 0.75rem 2rem;
+        border-radius: 15px;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        width: fit-content;
+        text-align: center;
+        box-shadow: 0 0 5px #00cc88;
+    }
+
+        .ver-button:hover {
+            background-color: #00aa77;
+        }
+</style>
+
+<div class="descripcion-container">
+    <a href="/Peliculas/Index" class="back-arrow">←</a>
+    
+    <div class="left-panel">
+       <img class="imagen-poster" src=@Model.Imagen />
+        <div class="rating-circle">@Model.Calificacion</div>
+    </div>
+
+    <div class="right-panel">
+        <h1 class="movie-title">@Model.Nombre</h1>
+        <p class="movie-description">Duración: @Model.Duracion </p>
+        <a href="#" class="ver-button">VER</a>
+    </div>
+</div>
+
+
+

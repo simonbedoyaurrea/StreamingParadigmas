@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+}
+@using streamingParadigmas.Clases
+@{
+    List<Juego> l_juegos=new List<Juego>{
+
+        new Juego("cuphead", "plataformas", 9.1f, "https://play-lh.googleusercontent.com/d7jNipDFeitiZWFjsZliZ-aX3fWC1rBRvvXK5wONsDfVWC9pAXotdFju5fsK_K_5U-c"),
+         new Juego("Hollow Knight", "Metroidvania", 9.5f, "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000003208/4643fb058642335c523910f3a7910575f56372f612f7c0c9a497aaae978d3e51"),
+         new Juego("God of War", "Acción", 9.7f, "https://cdn1.epicgames.com/offer/3ddd6a590da64e3686042d108968a6b2/EGS_GodofWar_SantaMonicaStudio_S2_1200x1600-fbdf3cbc2980749091d52751ffabb7b7_1200x1600-fbdf3cbc2980749091d52751ffabb7b7"),
+         new Juego("The Last of Us", "Aventura", 9.8f, "https://static.wikia.nocookie.net/thelastofus/images/4/45/Portada_Parte_I_R_limpia.png/revision/latest?cb=20230206140350&path-prefix=es"),
+         new Juego("DOOM Eternal", "Shooter", 9.2f, "https://cdn1.epicgames.com/offer/b5ac16dc12f3478e99dcfea07c13865c/EGS_DOOMEternal_idSoftware_S1_2560x1440-06b46993a4b6c19a9e614f2dd1202215")
+     };
+
+
+}
+
+<div class="text-center">
+    @{
+        foreach (Juego juego in l_juegos) { 
+        <h1>@juego.Nombre</h1>
+   <img src=@juego.Imagen alt="Alternate Text" style="border-radius:10px" />
+   <p>calificacion: @juego.Calificacion</p>
+        }
+}
+
+</div>
+
+
