@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,6 +21,9 @@
             position: relative;
             z-index: 100;
         }
+        header{
+        margin-bottom:20px
+        }
 
         /* Contenedor interno de la navbar */
         .navbar-container {
@@ -38,7 +42,7 @@
         /* Título centrado */
         .titulo {
             color: honeydew !important;
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: bold;
             text-decoration: none;
             flex: 1;
@@ -52,6 +56,26 @@
             transform: translateX(-50%);
             display: flex;
             gap: 30px;
+        }
+        .circulo-usuario{
+            padding:10px;
+            border-radius:50%;
+            background: #fff947;
+            background: linear-gradient(0deg,rgba(255, 249, 71, 1) 0%, rgba(218, 161, 38, 1) 37%, rgba(250, 221, 125, 1) 84%, rgba(253, 187, 45, 1) 100%);
+            background-size: 100% 800%;
+            animation: mover-vertical 8s ease infinite;
+            
+        }
+
+        @@keyframes zoom {
+            0%, 100%{
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+
         }
 
         /* Menú de usuario */
@@ -74,11 +98,13 @@
             transition: all 0.3s ease;
         }
         .puntos{
-            color: white;
-            text-decoration: none;
             font-size: 1rem;
-            position: relative;
-            transition: all 0.3s ease;
+            font-weight: bold;
+            background: linear-gradient(90deg,rgba(166, 237, 173, 1) 20%, rgba(66, 133, 49, 1) 68%, rgba(29, 107, 110, 1) 100%);
+            background-size: 800% 800%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: mover-gradiente 8s ease infinite;
         }
 
             .enlace-nav:hover {
@@ -105,6 +131,36 @@
                 font-size: 1.1rem;
             }
 
+        @@keyframes mover-gradiente {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        @@keyframes mover-vertical {
+            0%
+
+        {
+            background-position: 50% 100%;
+        }
+
+        50% {
+            background-position: 50% 0%;
+        }
+
+        100% {
+            background-position: 50% 100%;
+        }
+
+        }
+
     </style>
 </head>
 <body>
@@ -120,14 +176,14 @@
                 <!-- Menú central -->
                 <div class="navbar-menu">
                     <a class="enlace-nav" href="/peliculas">PELICULAS</a>
-                    <a class="enlace-nav" href="/Home/Puntos">SERIES</a>
-                    <a class="enlace-nav" href="/Home/Puntos">JUEGOS</a>
+                    <a class="enlace-nav" href="/series">SERIES</a>
+                    <a class="enlace-nav" href="/juegos">JUEGOS</a>
                 </div>
 
                 <!-- Menú usuario -->
                 <div class="navbar-user">
-                    <a class="enlace-nav" href="/">
-                        <i class="fas fa-user"></i>
+                    <a class="enlace-nav" href="/Cuentas">
+                        <div class="circulo-usuario"> <i class="fas fa-fire"><i class="fas fa-user"></i></i></div>
                     </a>
                     <span class="puntos">
                         <i class="fas fa-fire"></i> Puntos
@@ -137,8 +193,8 @@
         </nav>
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div>
+        <main role="main">
             @RenderBody()
         </main>
     </div>

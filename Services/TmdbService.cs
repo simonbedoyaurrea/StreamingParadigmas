@@ -1,20 +1,28 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
+using Microsoft.Extensions.Caching.Memory;
 using streamingParadigmas.Clases;
 
 public class TmdbService
 {
     private readonly HttpClient _http;
-    private readonly string apiKey = "fa47a3f3e8e14705697f7606fa3e61c7"; // Reemplaza por tu API Key de TMDB
+    private readonly IMemoryCache _cache;
+    private readonly string apiKey = "fa47a3f3e8e14705697f7606fa3e61c7"; 
 
-    public TmdbService(HttpClient http)
+    public TmdbService(HttpClient http, IMemoryCache cache)
     {
         _http = http;
+        _cache = cache;
     }
 
     public async Task<List<Pelicula>> GetPeliculasPopularesAsync()
     {
+        if (_cache.TryGetValue("peliculas_populares", out List<Pelicula> peliculasEnCache))
+        {
+            return peliculasEnCache;
+        }
+
         var peliculas = new List<Pelicula>();
-        int peliculasPorPagina = 20;
         int paginasNecesarias = 5;
 
         for (int page = 1; page <= paginasNecesarias; page++)
@@ -27,18 +35,56 @@ public class TmdbService
                     p.title,
                     (float)p.vote_average,
                     "https://image.tmdb.org/t/p/w500" + p.poster_path,
-                    TimeSpan.FromMinutes(120) // valor estimado
+                    TimeSpan.FromMinutes(120)
                 )
             ).ToList();
 
             peliculas.AddRange(nuevasPeliculas);
-
         }
 
+        _cache.Set("peliculas_populares", peliculas, TimeSpan.FromHours(1));
         return peliculas;
     }
 
+    public async Task<List<Serie>> GetSeriesPopularesAsync()
+    {
+        if (_cache.TryGetValue("series_populares", out List<Serie> seriesEnCache))
+        {
+            return seriesEnCache;
+        }
 
+        var series = new List<Serie>();
+
+        for (int page = 1; page <= 2; page++)
+        {
+            var response = await _http.GetAsync($"https://api.themoviedb.org/3/tv/popular?api_key={apiKey}&language=es-ES&page={page}");
+            var json = await response.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(json);
+            var results = doc.RootElement.GetProperty("results");
+
+            foreach (var item in results.EnumerateArray())
+            {
+                int id = item.GetProperty("id").GetInt32();
+                string nombre = item.GetProperty("name").GetString();
+                float calificacion = (float)item.GetProperty("vote_average").GetDouble();
+                string poster = item.GetProperty("poster_path").GetString();
+                string imagen = $"https://image.tmdb.org/t/p/w500{poster}";
+
+                var detalleResponse = await _http.GetAsync($"https://api.themoviedb.org/3/tv/{id}?api_key={apiKey}&language=es-ES");
+                var detalleJson = await detalleResponse.Content.ReadAsStringAsync();
+                using var detalleDoc = JsonDocument.Parse(detalleJson);
+                int temporadas = detalleDoc.RootElement.GetProperty("number_of_seasons").GetInt32();
+
+                var serie = new Serie(temporadas, nombre, calificacion, imagen);
+                series.Add(serie);
+            }
+        }
+
+        _cache.Set("series_populares", series, TimeSpan.FromHours(1));
+        return series;
+    }
+
+    // Clases internas
     private class TmdbResponse
     {
         public List<TmdbMovie> results { get; set; }
@@ -49,6 +95,6 @@ public class TmdbService
         public string title { get; set; }
         public double vote_average { get; set; }
         public string poster_path { get; set; }
-        public int? runtime { get; set; } // opcional, no viene en /popular
+        public int? runtime { get; set; }
     }
 }

@@ -1,30 +1,81 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿<style>
+    .imagen-hero {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: cover;
+    }
 
-}
-@using streamingParadigmas.Clases
-@{
-    List<Juego> l_juegos=new List<Juego>{
+    .contenedor-imagen-hero {
+        width: 100%;
+        height: 600px;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        overflow: hidden;
+    }
 
-        new Juego("cuphead", "plataformas", 9.1f, "https://play-lh.googleusercontent.com/d7jNipDFeitiZWFjsZliZ-aX3fWC1rBRvvXK5wONsDfVWC9pAXotdFju5fsK_K_5U-c"),
-         new Juego("Hollow Knight", "Metroidvania", 9.5f, "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000003208/4643fb058642335c523910f3a7910575f56372f612f7c0c9a497aaae978d3e51"),
-         new Juego("God of War", "Acción", 9.7f, "https://cdn1.epicgames.com/offer/3ddd6a590da64e3686042d108968a6b2/EGS_GodofWar_SantaMonicaStudio_S2_1200x1600-fbdf3cbc2980749091d52751ffabb7b7_1200x1600-fbdf3cbc2980749091d52751ffabb7b7"),
-         new Juego("The Last of Us", "Aventura", 9.8f, "https://static.wikia.nocookie.net/thelastofus/images/4/45/Portada_Parte_I_R_limpia.png/revision/latest?cb=20230206140350&path-prefix=es"),
-         new Juego("DOOM Eternal", "Shooter", 9.2f, "https://cdn1.epicgames.com/offer/b5ac16dc12f3478e99dcfea07c13865c/EGS_DOOMEternal_idSoftware_S1_2560x1440-06b46993a4b6c19a9e614f2dd1202215")
-     };
-
-
-}
-
-<div class="text-center">
-    @{
-        foreach (Juego juego in l_juegos) { 
-        <h1>@juego.Nombre</h1>
-   <img src=@juego.Imagen alt="Alternate Text" style="border-radius:10px" />
-   <p>calificacion: @juego.Calificacion</p>
+        .contenedor-imagen-hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 5;
+            background-image: linear-gradient(90deg,rgba(237, 47, 54, .3) 0%, rgba(166, 23, 94, .4) 72%, rgba(255, 161, 20, .8) 100%), url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
+            
         }
-}
 
+        .contenedor-imagen-hero:hover::after {
+            opacity: 1;
+        }
+
+    h2 {
+        position: absolute;
+        color: white;
+        z-index: 10;
+        font-size: 5em;
+        font-family:Impact;
+        top:10px;
+        left:10px;
+        text-align:center ;
+        
+
+    }
+
+    @@keyframes mover-gradiente {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+<div class="contenedor-hero">
+    <div class="contenedor-imagen-hero">
+        <img class="imagen-hero" src="https://image.api.playstation.com/vulcan/img/rnd/202011/1215/WyHa1BM3ISDVqYSEUMB9VZJs.png" alt="Alternate Text" />
+        <h2>GRAN <br />CATALOGO DE JUEGOS</h2>
+        <div class="capa"></div>
+    </div>
+    <div class="contenedor-imagen-hero">
+        <img class="imagen-hero" src="https://elcomercio.pe/resizer/pnChFtvGfUnAfz88S_W9xnLZMFg=/1200x680/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/5FPY5U2NBFBQ7LPECYV7FF36MU.jpg" alt="Alternate Text" />
+        <h2>LAS <br />MEJORES SERIES</h2>
+        <div class="capa"></div>
+
+    </div>
+    <div class="contenedor-imagen-hero">
+        <img class="imagen-hero" src="https://i.redd.it/i-just-saw-flow-recently-v0-mmd4bx0mfcje1.jpg?width=1200&format=pjpg&auto=webp&s=180500bb33b682dd14dce28bb57a75443595b408" alt="Alternate Text" />
+        <h2>LAS <br /> PELICULAS DEL MOMENTO</h2>
+        <div class="capa"></div>
+
+    </div>
 </div>
-
-

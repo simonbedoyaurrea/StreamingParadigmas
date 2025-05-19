@@ -19,7 +19,12 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #0d0029;
-    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+    /*    background-color: #0d0029;*/
+    background-color: #000000;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
 }
 
+* {
+    margin:0;
+    padding:0;
+}

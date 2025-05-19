@@ -1,25 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PARADIGMASFINAL.Services;
 using streamingParadigmas.Clases;
 
 public class PeliculasController : Controller
 {
-    private readonly TmdbService _tmdbService;
+    
+    private ProveedorService _pService;
 
-    public PeliculasController(TmdbService tmdbService)
+
+    public PeliculasController(ProveedorService pService)
     {
-        _tmdbService = tmdbService;
+        _pService = pService;
     }
 
     public async Task<IActionResult> Index()
     {
-        var peliculas = await _tmdbService.GetPeliculasPopularesAsync();
-        return View(peliculas); // pasa la lista a la vista
+        var peliculas = _pService.DarPeliculas();
+        return View(peliculas); 
     }
 
-    public async Task<IActionResult> Descripcion(string nombre)
+    public IActionResult Descripcion(string nombre)
     {
-        var peliculas = await _tmdbService.GetPeliculasPopularesAsync();
-        var pelicula = peliculas.FirstOrDefault(p => p.Nombre == nombre);
+        var pelicula = _pService.BuscarPelicula(nombre);
+        
 
         if (pelicula == null)
             return NotFound();

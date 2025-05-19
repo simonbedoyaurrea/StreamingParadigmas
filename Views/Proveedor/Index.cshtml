@@ -1,0 +1,44 @@
+﻿@model List<streamingParadigmas.Clases.Cuenta>
+
+
+@{
+    ViewData["Title"] = "Cuentas";
+}
+
+<h2>Listado de cuentas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre de usuario</th>
+            <th>Tiempo visto (películas)</th>
+            <th>Capítulos vistos</th>
+            <th>Score total (juegos)</th>
+            <th>Puntos ganados</th>
+            <th>Categoría</th>
+
+            <th>cuenta: @Context.Session.GetString("cuentaActiva")</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cuenta in Model)
+        {
+            <tr>
+                <td>@cuenta.Usuario.Nombre</td>
+                <td>@cuenta.TiempoVistoPeliculas</td>
+                <td>@cuenta.CapitulosVistosSeries</td>
+                <td>@cuenta.ScoresJuegos</td>
+                <td>@cuenta.PuntosGanados</td>
+                <td>@cuenta.Categoria</td>
+                <td>
+                    <form asp-action="JugarJuego" asp-controller="Cuentas" method="post">
+                        <input type="hidden" name="nombreJuego" value="Minecraft" />
+                        <button type="submit">Jugar</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

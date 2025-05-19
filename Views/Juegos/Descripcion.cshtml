@@ -1,4 +1,4 @@
-﻿@model streamingParadigmas.Clases.Pelicula;
+﻿@model streamingParadigmas.Clases.Juego;
 
 
 <style>
@@ -6,15 +6,15 @@
         background-color: transparent;
         color: white;
         display: flex;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         padding: 2rem;
         border-radius: 15px;
         position: relative;
         font-family: 'Comic Sans MS', cursive, sans-serif;
-        width:95%;
-        height:50vh;
-        margin:100px auto;
+        width: 95%;
+        height: 50vh;
+        margin: 100px auto;
     }
 
     .back-arrow {
@@ -29,40 +29,38 @@
     .left-panel {
         position: relative;
         width: 350px;
-        height:500px;
-        border-radius:20px;
+        height: 500px;
+        border-radius: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color:antiquewhite;
-        margin-left:40px;
-
+        background-color: antiquewhite;
+        margin-left: 40px;
     }
 
-    
 
-    .imagen-poster{
-        width:100%;
-        height:100%;
-        border-radius:20px;
+
+    .imagen-poster {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
     }
 
     .rating-circle {
         position: absolute;
         top: -10px;
-        right:-10px;
+        right: -10px;
         background: url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
-        background-color:black;
+        background-color: black;
         border-radius: 50%;
         width: 60px;
         height: 60px;
-  
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: bold;
         font-size: 1.2rem;
-        padding:.8rem;
+        padding: .8rem;
         box-shadow: 0 0 50px 5px rgb(232, 59, 54), 0 0 10px 8px rgba(70, 10, 64, 0.9);
     }
 
@@ -73,16 +71,13 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        background: linear-gradient( to right, rgba(174, 45, 104, 0.5) 50%, 
-        rgba(40, 6, 89, 0.4) 90%,
-        rgba(40, 6, 89, 0.2) 
-        );
-        align-items:center
+        background: linear-gradient( to right, rgba(174, 45, 104, 0.5) 50%, rgba(40, 6, 89, 0.4) 90%, rgba(40, 6, 89, 0.2) );
+        align-items: center
     }
 
     .movie-title {
         color: white;
-        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 2rem;
         margin-bottom: 1rem;
     }
@@ -94,7 +89,7 @@
     }
 
     .ver-button {
-        background-color:black;
+        background-color: black;
         padding: 0.75rem 2rem;
         border-radius: 15px;
         color: white;
@@ -112,18 +107,18 @@
 
 <div class="descripcion-container">
     <a href="/Peliculas/Index" class="back-arrow">←</a>
-    
+
     <div class="left-panel">
-       <img class="imagen-poster" src=@Model.Imagen />
+        <img class="imagen-poster" src=@Model.Imagen />
         <div class="rating-circle">@Model.Calificacion</div>
     </div>
 
     <div class="right-panel">
         <h1 class="movie-title">@Model.Nombre</h1>
-        <p class="movie-description">Duración: @Model.Duracion </p>
-        <form asp-action="VerContenido" asp-controller="Cuentas" method="post">
+        <p class="movie-description">Genero: @Model.Genero </p>
+        <form asp-action="JugarJuego" asp-controller="Cuentas" method="post">
             <input type="hidden" name="contenido" value="@Model.Nombre" />
-            <button class="ver-button" type="submit">ver</button>
+            <button class="ver-button" type="submit">JUGAR</button>
         </form>
     </div>
 </div>

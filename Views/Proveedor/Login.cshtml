@@ -1,0 +1,14 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+</form>
