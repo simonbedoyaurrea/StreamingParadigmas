@@ -15,7 +15,6 @@
         width: 95%;
         height: 50vh;
         margin: 100px auto;
-        /* 🔥 Añadido para efecto 3D */
         perspective: 1200px;
     }
 
@@ -57,10 +56,6 @@
         
         
     }
-
- 
- 
-
     .imagen-wrapper {
         width: 100%;
         height: 100%;
@@ -117,12 +112,12 @@
         font-size: 1.2rem;
         padding: .8rem;
         box-shadow: 0 0 50px 5px rgb(232, 59, 54), 0 0 10px 8px rgba(70, 10, 64, 0.9);
-        transform: rotateX(5deg) rotateY(-5deg) translateZ(120px); /* 🆗 Profundidad */
+        transform: rotateX(5deg) rotateY(-5deg) translateZ(120px);
         transition: transform 0.5s ease;
         text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 
-    /* 🔥 Panel derecho con transformación 3D al hacer hover en el contenedor */
+    
     .right-panel {
         width: 26%;
         height: 450px;
@@ -133,11 +128,11 @@
         background: linear-gradient(to right, rgba(109, 247, 150, 0.5), rgba(40, 6, 89, 0.4),rgba(0,0,0,0.2));
         align-items: center;
         transform-style: preserve-3d;
-        transform: rotateY(0deg); /* 🆕 Estado inicial */
+        transform: rotateY(0deg); 
         transition: transform 1s ease;
     }
 
-        /* 🔥 Al hacer hover sobre el contenedor, rota el panel */
+        
         .right-panel:hover {
             transform: rotateY(-15deg);
         }
@@ -147,7 +142,7 @@
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 2.5rem;
         margin-bottom: 1rem;
-        transform: rotateX(5deg) rotateY(-5deg) translateZ(120px); /* 🆕 Más profundidad */
+        transform: rotateX(5deg) rotateY(-5deg) translateZ(120px); 
         transition: transform 0.5s ease;
         text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
@@ -207,7 +202,8 @@
     <div class="right-panel">
         <h1 class="movie-title">@Model.Nombre</h1>
         <div class="rating-circle">@Model.Calificacion</div>
-        <p class="movie-description">Duración: @Model.Temporadas </p>
+        <p class="movie-description">Temporadas: @Model.Temporadas </p>
+        <p class="movie-description">capitulos por temporada|: @Model.Capxtemporada </p>
         <form asp-action="VerContenido" asp-controller="Cuentas" method="post">
             <input type="hidden" name="contenido" value="@Model.Nombre" />
             <button class="ver-button" type="submit">ver</button>

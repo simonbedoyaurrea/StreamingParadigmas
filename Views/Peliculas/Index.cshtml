@@ -154,7 +154,7 @@
                 <div class="movie-overlay">
                     <div class="movie-title">@pelicula.Nombre</div>
                     <div class="movie-rating">⭐ @pelicula.Calificacion</div>
-                    <div class="movie-duration">Duración: @pelicula.Duracion.Minutes min</div>
+                    <div class="movie-duration">Duración: @pelicula.Duracion.TotalMinutes min</div>
                     <a asp-controller="Peliculas" asp-action="Descripcion" asp-route-nombre="@pelicula.Nombre" class="movie-link"><div class="mas-boton">VER MAS</div></a>
                 </div>
             </div>

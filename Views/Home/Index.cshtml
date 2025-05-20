@@ -83,6 +83,27 @@
         border-radius:10px
     }
 
+    .form-login{
+    position:absolute;
+    bottom:80px;
+    right:130px;
+    z-index:1000;
+    }
+
+    .boton-login{
+        padding: 15px 30px;
+        background: linear-gradient(to right, #AE2D68, #280659);
+        
+        color:white;
+        border-radius: 10px;
+        border: none;
+        transition:all ease-in-out .4s;
+
+    }
+    .boton-login:hover{
+        transform:scale(1.05);
+    }
+
     @@keyframes mover-gradiente {
         0% {
             background-position: 0% 50%;
@@ -96,12 +117,70 @@
             background-position: 0% 50%;
         }
     }
+
+    .carrusel-contenedor {
+        margin: 0;
+        background: url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
+        height: 70vh;
+        background: rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+    }
+
+    .carrusel {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: girar 17s linear infinite;
+        margin-top:60px
+       
+    }
+    .titulo-pantallas{
+    margin-left:100px
+    }
+
+        .carrusel img {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
+          
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotateY(var(--rot)) translateZ(400px);
+        }
+
+    @@keyframes girar {
+        from {
+            transform: rotateY(0deg);
+        }
+
+        to {
+            transform: rotateY(360deg);
+        }
+    }
 </style>
 <div class="contenedor-hero">
     <div class="contenedor-imagen-hero imagen-principal">
         <img class="imagen-hero" src="~/imagenes/Noche de película en pareja.png" alt="Alternate Text" />
         <div class="capa"></div>
-       
+    </div>
+    
+    <div class="carrusel-contenedor">
+        <h2 class="titulo-pantallas">HASTA 6 PANTALLAS AL TIEMPO</h2>
+        <div class="carrusel">
+            <img src="https://cdn2.unrealengine.com/fortnite-disney-star-wars-all-1920x1080-296e87fd5954.jpg" style="--rot: 0deg">
+            <img src="https://img.asmedia.epimg.net/resizer/v2/MIBE3RUHAFGNTNGXFFB3PSJVD4.jpg?auth=d07ae930a503097aaf4e5b6bcccbc72bdb633c47563c3055f5d5181d16cc7b83&width=1472&height=1104&smart=true" style="--rot: 60deg">
+            <img src="https://cafeconlagerencia.com/wp-content/uploads/2024/06/int2.jpg" style="--rot: 120deg">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU2q3SiW3ljARE5LFGU74SePQgowQyLfbcQQ&s" style="--rot: 180deg">
+            <img src="https://i.kinja-img.com/image/upload/c_fit,q_60,w_645/7029a99a7414c5d147a7a5e9a236e056.jpg" style="--rot: 240deg">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSwdADfJhW_ubN6HvS6Z3P6RzOSR5aLsPT1Q&s" style="--rot: 300deg">
+        </div>
     </div>
 
     <div class="contenedor-imagen-hero">
@@ -122,3 +201,7 @@
 
     </div>
 </div>
+
+
+
+

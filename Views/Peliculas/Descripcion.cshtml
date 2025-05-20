@@ -206,7 +206,7 @@
     <div class="right-panel">
         <h1 class="movie-title">@Model.Nombre</h1>
         <div class="rating-circle">@Model.Calificacion</div>
-        <p class="movie-description">Duración: @Model.Duracion </p>
+        <p class="movie-description">Duración: @Model.TiempoVistoPeliculas.Hours horas @Model.TiempoVistoPeliculas.Minutes minutos </p>
         <form asp-action="VerContenido" asp-controller="Cuentas" method="post">
             <input type="hidden" name="contenido" value="@Model.Nombre" />
             <button class="ver-button" type="submit">ver</button>

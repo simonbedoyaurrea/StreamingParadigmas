@@ -8,7 +8,7 @@ public class TmdbService
     //se usa HttpClient para lograr hacer peticiones a la api y IMemoryCache se usa para no hacer mas peticiones de loq ue deberiamos
     private readonly HttpClient _http;
     private readonly IMemoryCache _cache;
-    private readonly string apiKey = "fa47a3f3e8e14705697f7606fa3e61c7"; 
+    private readonly string apiKey = "fa47a3f3e8e14705697f7606fa3e61c7";
 
     public TmdbService(HttpClient http, IMemoryCache cache)
     {
@@ -19,8 +19,8 @@ public class TmdbService
     //metodo para obtener la listas de las peliculas populares de la API de TMDB
     public async Task<List<Pelicula>> GetPeliculasPopularesAsync()
     {
-
-        try {
+        try
+        {
             if (_cache.TryGetValue("peliculas_populares", out List<Pelicula> peliculasEnCache))
             {
                 return peliculasEnCache;
@@ -34,16 +34,20 @@ public class TmdbService
                 var url = $"https://api.themoviedb.org/3/movie/popular?api_key={apiKey}&language=es-ES&page={page}";
                 var response = await _http.GetFromJsonAsync<TmdbResponse>(url);
 
-                var nuevasPeliculas = response.results.Select(p =>
-                    new Pelicula(
+                foreach (var p in response.results)
+                {
+                    var detalleUrl = $"https://api.themoviedb.org/3/movie/{p.id}?api_key={apiKey}&language=es-ES";
+                    var detalle = await _http.GetFromJsonAsync<TmdbMovieDetail>(detalleUrl);
+
+                    var pelicula = new Pelicula(
                         p.title,
                         (float)p.vote_average,
                         "https://image.tmdb.org/t/p/w500" + p.poster_path,
-                        TimeSpan.FromMinutes(120)
-                    )
-                ).ToList();
+                        TimeSpan.FromMinutes(detalle.runtime ?? 0)
+                    );
 
-                peliculas.AddRange(nuevasPeliculas);
+                    peliculas.Add(pelicula);
+                }
             }
 
             _cache.Set("peliculas_populares", peliculas, TimeSpan.FromHours(1));
@@ -51,15 +55,15 @@ public class TmdbService
         }
         catch (Exception ex)
         {
-            throw new Exception("error en la funcion de obtener peliculas populares");
+            throw new Exception("error en la funcion de obtener peliculas populares", ex);
         }
-       
     }
 
     //Metodo para obtener las series mas populares de TMDB
     public async Task<List<Serie>> GetSeriesPopularesAsync()
     {
-        try {
+        try
+        {
             if (_cache.TryGetValue("series_populares", out List<Serie> seriesEnCache))
             {
                 return seriesEnCache;
@@ -99,7 +103,7 @@ public class TmdbService
         {
             throw new Exception("error en la funcion de obtener series populares");
         }
-        
+
     }
 
     // Clases internas, se usaron para lograr hacer la peticion de la duracion
@@ -110,9 +114,14 @@ public class TmdbService
 
     private class TmdbMovie
     {
+        public int id { get; set; } // <--- necesitas el ID para pedir más datos
         public string title { get; set; }
         public double vote_average { get; set; }
         public string poster_path { get; set; }
+    }
+
+    private class TmdbMovieDetail
+    {
         public int? runtime { get; set; }
     }
 }
