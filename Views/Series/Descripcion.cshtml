@@ -125,7 +125,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        background: linear-gradient(to right, rgba(109, 247, 150, 0.5), rgba(40, 6, 89, 0.4),rgba(0,0,0,0.2));
+        background: linear-gradient(to right,rgba(174, 45, 104, 0.0) 5%, rgba(109, 247, 150, 0.5), rgba(40, 6, 89, 0.4),rgba(0,0,0,0.2));
         align-items: center;
         transform-style: preserve-3d;
         transform: rotateY(0deg); 
@@ -169,8 +169,9 @@
     form{
      transform-style:preserve-3d
     }
+
     .ver-button {
-        background-color: black;
+        background-color: rgba(0,0,0,0.3);
         padding: 0.75rem 2rem;
         border-radius: 15px;
         color: white;
@@ -181,12 +182,22 @@
         box-shadow: 0 0 5px white;
         transform: translateZ(60px);
         transition: background-color 0.3s ease, transform 0.5s ease;
+        border: none
     }
 
-        .ver-button:hover {
-            background-color: #00aa77;
-            transform: translateZ(120px);
-        }
+    
+
+    .ver-button:hover {
+            background-color: rgba(219, 64, 100,0.2);
+        transform: translateZ(120px);
+            color: rgba(219, 64, 100,1);
+    }
+
+    .ver-button:active {
+            background-color: rgba(219, 64, 100,0.2);
+        transform: translateZ(10px);
+    }
+
 
 </style>
 
@@ -203,10 +214,10 @@
         <h1 class="movie-title">@Model.Nombre</h1>
         <div class="rating-circle">@Model.Calificacion</div>
         <p class="movie-description">Temporadas: @Model.Temporadas </p>
-        <p class="movie-description">capitulos por temporada|: @Model.Capxtemporada </p>
+        <p class="movie-description">capitulos por temporada: @Model.Capxtemporada </p>
         <form asp-action="VerContenido" asp-controller="Cuentas" method="post">
             <input type="hidden" name="contenido" value="@Model.Nombre" />
-            <button class="ver-button" type="submit">ver</button>
+            <button class="ver-button" type="submit">ver <i class="fa-solid fa-tv"></i></button>
         </form>
     </div>
 </div>

@@ -4,7 +4,6 @@
 }
 
 <style>
-    /* Fondo general */
     body {
         margin: 0;
         font-family: 'Segoe UI', sans-serif;
@@ -13,6 +12,7 @@
         overflow: hidden;
         color: white;
         position: relative;
+        perspective: 1000px;
     }
 
     .grain {
@@ -32,36 +32,49 @@
         height: 100%;
         z-index: 2;
         position: relative;
+        transform-style: preserve-3d;
     }
 
     .login-card {
-        background-color: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(20px);
+        background-color: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(25px);
         padding: 40px;
         border-radius: 16px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.4);
-        width: 350px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+        width: 360px;
         text-align: center;
+        transition: transform 0.6s ease, box-shadow 0.6s ease;
+        transform-style: preserve-3d;
     }
 
+        .login-card:hover {
+            transform: rotateX(10deg) rotateY(-10deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 255, 255, 0.15);
+        }
+
     .logo {
-        font-size: 2.5rem;
+        font-size: 2.7rem;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         color: white;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
     }
 
         .logo .dot {
             color: #ffffff;
             font-weight: bold;
+            text-shadow: 0 0 10px #ffffff;
         }
 
         .logo span {
             color: #ffcc00;
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
         }
 
     h2 {
         margin-bottom: 25px;
+        font-weight: 400;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
     }
 
     .form-group {
@@ -71,13 +84,20 @@
     input {
         width: 100%;
         padding: 12px;
-        border-radius: 8px;
+        border-radius: 10px;
         border: none;
         outline: none;
         font-size: 15px;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.12);
         color: white;
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+        transition: background 0.3s ease, box-shadow 0.3s ease;
     }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        }
 
         input::placeholder {
             color: #ccc;
@@ -93,11 +113,13 @@
         color: #1e0069;
         font-size: 16px;
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: background 0.3s ease, transform 0.3s ease;
     }
 
         .btn:hover {
             background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
 
     .switch {
@@ -106,10 +128,14 @@
     }
 
         .switch a {
-            color: #00ffcc;
+            color: #00ffcc !important;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
+            .switch a:hover {
+                color: #00ffaa !important;
+            }
 </style>
 
 <div class="grain"></div>
@@ -117,12 +143,12 @@
     <div class="login-card">
         <h1 class="logo"><span class="dot">.</span>NET<span>flix</span></h1>
         <h2>Registrarse</h2>
-        <form asp-controller="Proveedor" asp-action="Registro" method="post">
+        <form asp-action="Registro" method="post">
             <div class="form-group">
                 <input type="text" name="username" placeholder="Nombre de Usuario" required />
             </div>
             <button type="submit" class="btn">Entrar</button>
-            <p class="switch">¿ya tienes cuenta? <a href="/proveedor/login">inicia sesion aquí</a></p>
+            <p class="switch">¿ya tienes cuenta? <a href="/proveedor/login">inicia sesión aquí</a></p>
         </form>
     </div>
 </div>
