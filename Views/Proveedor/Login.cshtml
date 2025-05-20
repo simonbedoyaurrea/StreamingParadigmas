@@ -138,6 +138,12 @@
     <div class="login-card">
         <h1 class="logo"><span class="dot">.</span>NET<span>flix</span></h1>
         <h2>Iniciar sesión</h2>
+        @if (ViewBag.Error != null)
+        {
+            <div style="color: #ff6666; margin-bottom: 15px;">
+                @ViewBag.Error
+            </div>
+        }
         <form asp-action="Login" method="post">
             <div class="form-group">
                 <input type="text" name="username" placeholder="Nombre de usuario" required />

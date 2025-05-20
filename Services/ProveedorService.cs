@@ -139,12 +139,19 @@ namespace PARADIGMASFINAL.Services
 
         }
 
-        public void AgregarCuenta(string nombre)
+        public bool AgregarCuenta(string nombre)
         {
             try {
+
+                bool cuentaExistente = l_cuentas.Any(c => c.Usuario.Nombre == nombre);
+
+                if (cuentaExistente)
+                    return false;
+                
                 Usuario usu = new Usuario(nombre);
                 Cuenta cu = new Cuenta(usu);
                 l_cuentas.Add(cu);
+                return true;
             }
             catch (Exception ex)
             {

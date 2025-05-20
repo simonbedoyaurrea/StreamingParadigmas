@@ -122,16 +122,18 @@
         <h3>Carrusel </h3>
         @foreach (var serie in carruseles[i])
         {
+            <a asp-controller="Series" asp-action="Descripcion" asp-route-nombre="@serie.Nombre" class="movie-link">
   
             <div class="movie-item">
                 <img src="@serie.Imagen" alt="@serie.Nombre" class="movie-img" />
                 <div class="movie-overlay">
                     <div class="movie-title">@serie.Nombre</div>
                     <div class="movie-rating ">⭐ @serie.Calificacion</div>
-                    @* <div class="movie-duration">Duración: @pelicula.Duracion.Minutes min</div> *@
-                    <a asp-controller="Series" asp-action="Descripcion" asp-route-nombre="@serie.Nombre" class="movie-link"><div class="mas-boton">VER MAS</div></a>
+                    
+                    
                 </div>
             </div>
+            </a>
         }
     </div>
     }

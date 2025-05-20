@@ -36,7 +36,14 @@ namespace PARADIGMASFINAL.Controllers
         [HttpPost]
         public IActionResult Registro(string username)
         {
-            _pService.AgregarCuenta(username);
+            var cuenta=_pService.AgregarCuenta(username);
+
+            if (!cuenta)
+            {
+                ViewBag.Error ="cuenta ya existente";
+                return View(); 
+            
+            }
             HttpContext.Session.SetString("CuentaSesion", username);
             return RedirectToAction("Index","Cuentas");
         }
@@ -48,9 +55,11 @@ namespace PARADIGMASFINAL.Controllers
             if (cuenta != null)
             {
                 HttpContext.Session.SetString("CuentaSesion", cuenta.Usuario.Nombre);
+                return RedirectToAction("Index", "Cuentas");
             }
-
-            return RedirectToAction("Index","Cuentas");
+            ViewBag.Error = "La cuenta no existe";
+            return View();
+            
         }
 
 

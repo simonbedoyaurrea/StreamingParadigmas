@@ -22,7 +22,7 @@ namespace PARADIGMASFINAL.Services
             try {
                 var juegos = new List<Juego>();
 
-                var url = $"https://api.rawg.io/api/games?ordering=-added&page_size=50&key={apiKey}";
+                var url = $"https://api.rawg.io/api/games?ordering=-added&page_size=80&key={apiKey}";
 
                 var response = await _http.GetFromJsonAsync<RawgResponse>(url);
 
