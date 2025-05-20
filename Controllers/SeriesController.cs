@@ -13,12 +13,14 @@ namespace PARADIGMASFINAL.Controllers
             _pService = pService;
         }
 
+        //pasa la lista de series al index con el carrusel
         public async Task<IActionResult> Index()
         {
             var series = _pService.DarSerie();
-            return View(series); // pasa la lista a la vista
+            return View(series); 
         }
 
+        //pasa la serie seleccionada y muestra sus datos
         public IActionResult Descripcion(string nombre)
         {
             var serie =_pService.BuscarSerie(nombre);

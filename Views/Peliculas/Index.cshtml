@@ -1,12 +1,27 @@
 ﻿@model List<streamingParadigmas.Clases.Pelicula> 
 @using System.Linq
+@if (TempData["Mensaje"] != null)
+{
+    <div id="mensaje-alerta" class="juego-jugado">
+        @TempData["Mensaje"]
+    </div>
+
+    <script>
+        setTimeout(() => {
+            const alerta = document.getElementById('mensaje-alerta');
+            if (alerta) {
+                alerta.style.display = 'none';
+            }
+        }, 2600);
+    </script>
+}
 
 @{
     ViewData["Title"] = "Películas Populares";
 }
 @{
     int totalPeliculas = Model.Count;
-    int chunkSize = (int)Math.Ceiling(totalPeliculas / 2.0);
+    int chunkSize = (int)Math.Ceiling(totalPeliculas / 5.0);
     List<List<streamingParadigmas.Clases.Pelicula>> carruseles = new List<List<streamingParadigmas.Clases.Pelicula>>();
 
     for (int i = 0; i < totalPeliculas; i += chunkSize)
@@ -25,7 +40,20 @@
         scroll-snap-type: x mandatory;
         padding: 1rem 1rem;
         scrollbar-width: none;
-        background: linear-gradient(to right,rgba(174, 45, 104, 0.0),rgba(174, 45, 104, 0.4), rgba(40, 6, 89, 0.4),rgba(40,6, 89, 0.0));
+        background: linear-gradient(to right,rgba(174, 45, 104, 0.0)12%,rgba(174, 45, 104, 0.4), rgba(40, 6, 89, 0.4),rgba(40,6, 89, 0.0));
+    }
+
+    .juego-jugado {
+        position: fixed;
+        width: auto;
+        height: 60px;
+        padding: 8px 20px;
+        background: green;
+        color: white;
+        z-index: 100;
+        border-radius: 15px;
+        bottom: 10px;
+        right: 10px
     }
 
         .carousel-container::-webkit-scrollbar {
@@ -34,7 +62,7 @@
 
     .movie-item {
         flex: 0 0 auto;
-        width: 220px;
+        width: 210px;
         scroll-snap-align: start;
         position: relative;
         border-radius: 15px;
@@ -90,10 +118,12 @@
     h2 {
         text-align: center;
         margin-top: 2rem;
+       font-size: 3rem;
+       font-family:Impact;
+       color:darkslateblue
+
     }
-    .title{
-    color:white;
-    }
+    
     .mas-boton{
     width:90px;
     height:30px;

@@ -3,13 +3,126 @@
     ViewData["Title"] = "Registro";
 }
 
-<h2>Registro</h2>
+<style>
+    /* Fondo general */
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(90deg, #b1326a, #1e0069);
+        height: 100vh;
+        overflow: hidden;
+        color: white;
+        position: relative;
+    }
 
-<form asp-action="Registro" method="post">
-    <div class="form-group">
-        <label for="username">Nombre de usuario:</label>
-        <input type="text" id="username" name="username" class="form-control" required />
+    .grain {
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+        opacity: 0.1;
+        z-index: 1;
+    }
+
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        z-index: 2;
+        position: relative;
+    }
+
+    .login-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        width: 350px;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+        .logo .dot {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffcc00;
+        }
+
+    h2 {
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+        input::placeholder {
+            color: #ccc;
+        }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #ffcc00;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        color: #1e0069;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #e6b800;
+        }
+
+    .switch {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+        .switch a {
+            color: #00ffcc;
+            text-decoration: none;
+        }
+
+</style>
+
+<div class="grain"></div>
+<div class="login-container">
+    <div class="login-card">
+        <h1 class="logo"><span class="dot">.</span>NET<span>flix</span></h1>
+        <h2>Registrarse</h2>
+        <form asp-controller="Proveedor" asp-action="Registro" method="post">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Nombre de Usuario" required />
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+            <p class="switch">¿ya tienes cuenta? <a href="/proveedor/login">inicia sesion aquí</a></p>
+        </form>
     </div>
-
-    <button type="submit" class="btn btn-success">Registrarse</button>
-</form>
+</div>

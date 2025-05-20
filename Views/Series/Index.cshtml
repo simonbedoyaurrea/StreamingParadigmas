@@ -4,6 +4,16 @@
 @{
     ViewData["Title"] = "Películas Populares";
 }
+@{
+    int totalPeliculas = Model.Count;
+    int chunkSize = (int)Math.Ceiling(totalPeliculas / 5.0);
+    List<List<streamingParadigmas.Clases.Serie>> carruseles = new List<List<streamingParadigmas.Clases.Serie>>();
+
+    for (int i = 0; i < totalPeliculas; i += chunkSize)
+    {
+        carruseles.Add(Model.Skip(i).Take(chunkSize).ToList());
+    }
+}
 <style>
     .carousel-container {
         width: 90%;
@@ -107,10 +117,10 @@
 
 <h2 class="title">CATALOGO SERIES</h2>
 
-
+@for (int i = 0; i < carruseles.Count; i++){
     <div class="carousel-container">
         <h3>Carrusel </h3>
-        @foreach (var serie in Model)
+        @foreach (var serie in carruseles[i])
         {
   
             <div class="movie-item">
@@ -124,4 +134,7 @@
             </div>
         }
     </div>
+    }
 
+{
+  

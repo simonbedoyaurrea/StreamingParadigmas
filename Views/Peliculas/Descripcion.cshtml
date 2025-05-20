@@ -1,100 +1,180 @@
 ﻿@model streamingParadigmas.Clases.Pelicula;
 
 
-<style>
+
+
+
+    <style >
     .descripcion-container {
         background-color: transparent;
         color: white;
         display: flex;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         padding: 2rem;
         border-radius: 15px;
         position: relative;
         font-family: 'Comic Sans MS', cursive, sans-serif;
-        width:95%;
-        height:50vh;
-        margin:100px auto;
+        width: 95%;
+        height: 50vh;
+        margin: 100px auto;
+        
+        perspective: 1200px;
     }
 
     .back-arrow {
         position: absolute;
-        top: 15px;
+        font-family: Impact;
         left: 20px;
-        color: #00ff99;
-        font-size: 1.5rem;
+        font-size: 6rem;
+        color: rgba(174, 45, 104, 0.3) !important;
         text-decoration: none;
+        background: linear-gradient( to right, rgba(174, 45, 104, 0.3) 50%, rgba(40, 6, 89, 0.3) 90%, rgba(40, 6, 89, 0.2) );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 150%;
+        width: 100px;
+        transition: all 0.3s ease;
     }
+
+        .back-arrow:hover {
+            background: linear-gradient( to right, rgba(174, 45, 104, 0.6) 50%, rgba(40, 6, 89, 0.5) 90%, rgba(40, 6, 89, 0.2) );
+        }
+
+
 
     .left-panel {
         position: relative;
         width: 350px;
-        height:500px;
-        border-radius:20px;
+        height: 500px;
+        border-radius: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color:antiquewhite;
-        margin-left:40px;
-
+        background-color: transparent;
+        margin-left: 40px;
+        perspective: 1000px;
+        overflow: hidden;
     }
 
-    
+    .imagen-wrapper {
+        width: 100%;
+        height: 100%;
+        animation: flotar 6s ease-in-out infinite alternate;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-    .imagen-poster{
-        width:100%;
-        height:100%;
-        border-radius:20px;
+    .imagen-poster {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        object-fit: cover;
+        transform-origin: center;
+        animation: rotarY 8s ease-in-out infinite alternate;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    @@keyframes rotarY {
+        0% {
+            transform: rotateY(-10deg);
+        }
+
+        100% {
+            transform: rotateY(10deg);
+        }
+    }
+
+    @@keyframes flotar {
+        0% {
+            transform: translateX(0px);
+        }
+
+        50% {
+            transform: translateX(10px);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
     }
 
     .rating-circle {
-        position: absolute;
-        top: -10px;
-        right:-10px;
         background: url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
-        background-color:black;
+        background-color: black;
         border-radius: 50%;
         width: 60px;
         height: 60px;
-  
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: bold;
         font-size: 1.2rem;
-        padding:.8rem;
+        padding: .8rem;
         box-shadow: 0 0 50px 5px rgb(232, 59, 54), 0 0 10px 8px rgba(70, 10, 64, 0.9);
+        transform: rotateX(5deg) rotateY(-5deg) translateZ(120px); 
+        transition: transform 0.5s ease;
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 
+    
     .right-panel {
-        width: 30%;
+        width: 26%;
         height: 450px;
         padding-left: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        background: linear-gradient( to right, rgba(174, 45, 104, 0.5) 50%, 
-        rgba(40, 6, 89, 0.4) 90%,
-        rgba(40, 6, 89, 0.2) 
-        );
-        align-items:center
+        background: linear-gradient( to right,rgba(174, 45, 104, 0.0)5%, rgba(174, 45, 104, 0.5) 50%, rgba(40, 6, 89, 0.4) 90%, rgba(40, 6, 89, 0.2) );
+        align-items: center;
+        transform-style: preserve-3d;
+        transform: rotateY(0deg); 
+        transition: transform 1s ease;
     }
+
+        
+        .right-panel:hover {
+            transform: rotateY(-15deg);
+        }
 
     .movie-title {
         color: white;
-        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 2rem;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 2.5rem;
         margin-bottom: 1rem;
+        transform: rotateX(5deg) rotateY(-5deg) translateZ(120px);
+        transition: transform 0.5s ease;
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .right-panel:hover .movie-title {
+        transform: translateZ(200px);
+    }
+
+    .right-panel:hover .rating-circle {
+        transform: translateZ(200px);
     }
 
     .movie-description {
         font-size: 1rem;
         line-height: 1.6;
         margin-bottom: 2rem;
+        transform: translateZ(80px);
+        transition: transform 0.5s ease;
+    }
+
+    .right-panel:hover .movie-description {
+        transform: translateZ(150px);
+    }
+
+    form {
+        transform-style: preserve-3d
     }
 
     .ver-button {
-        background-color:black;
+        background-color: black;
         padding: 0.75rem 2rem;
         border-radius: 15px;
         color: white;
@@ -103,23 +183,29 @@
         width: fit-content;
         text-align: center;
         box-shadow: 0 0 5px white;
+        transform: translateZ(60px);
+        transition: background-color 0.3s ease, transform 0.5s ease;
     }
 
         .ver-button:hover {
             background-color: #00aa77;
+            transform: translateZ(120px);
         }
+
 </style>
 
+
 <div class="descripcion-container">
-    <a href="/Peliculas/Index" class="back-arrow">←</a>
+    <a href="/Peliculas/Index" class="back-arrow">&lt;</a>
     
     <div class="left-panel">
        <img class="imagen-poster" src=@Model.Imagen />
-        <div class="rating-circle">@Model.Calificacion</div>
+       
     </div>
 
     <div class="right-panel">
         <h1 class="movie-title">@Model.Nombre</h1>
+        <div class="rating-circle">@Model.Calificacion</div>
         <p class="movie-description">Duración: @Model.Duracion </p>
         <form asp-action="VerContenido" asp-controller="Cuentas" method="post">
             <input type="hidden" name="contenido" value="@Model.Nombre" />

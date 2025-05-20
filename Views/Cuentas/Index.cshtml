@@ -3,6 +3,11 @@
 
 <style>
 
+    body{
+        background: #45163e;
+        background:url("https://www.transparenttextures.com/patterns/dark-denim-3.png"), radial-gradient(circle,rgba(69, 22, 62, 1) 17%, rgba(0, 0, 0, 1) 55%);
+    }
+
     .contenedor-info-cuenta{
     margin:auto;
     display:flex;
@@ -11,11 +16,20 @@
     }
 
 
-    h2, h3 {
+     h3 {
     color: #AE2D68;
     margin-top: 30px;
     font-family:impact;
     padding-left: 10px;
+    }
+
+    h2 {
+        color: white; 
+        text-shadow: 0px 0px 6px #AE2D68,0px 0px 8px rgb(40,6,89);
+        margin-top: 30px;
+        font-family: impact;
+        font-size:5rem;
+        padding-left: 10px;
     }
 
     ul {
@@ -118,6 +132,29 @@
     font-size: 13px;
     }
 
+    }
+
+
+    .carrusel-visto {
+        display: flex;
+        width:50%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 15px;
+        padding: 10px 0;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap; /* Para que no se vayan a otra línea */
+    }
+
+        .carrusel-visto::-webkit-scrollbar {
+            display: none; /* Oculta la barra de scroll en navegadores Webkit */
+        }
+
+    /* También es útil ocultarla en otros navegadores */
+    .carrusel-visto {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE y Edge */
     }
 </style>
 

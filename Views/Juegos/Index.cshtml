@@ -1,12 +1,39 @@
 ﻿@model List<streamingParadigmas.Clases.Juego>
 @using System.Linq
+@if (TempData["Mensaje"] != null)
+{
+    <div id="mensaje-alerta" class="juego-jugado">
+        @TempData["Mensaje"]
+    </div>
+
+    <script>
+        setTimeout(() => {
+            const alerta = document.getElementById('mensaje-alerta');
+            if (alerta) {
+                alerta.style.display = 'none';
+            }
+        }, 2600);
+    </script>
+}
+@if (TempData["CategoriaMensaje"] != null)
+{
+    <div class="alerta-categoria" id="categoriaMsg">
+        @TempData["CategoriaMensaje"]
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('categoriaMsg').style.display = 'none';
+        }, 4000); // desaparece en 4 segundos
+    </script>
+}
 
 @{
     ViewData["Title"] = "Películas Populares";
 }
 @{
     int totalPeliculas = Model.Count;
-    int chunkSize = (int)Math.Ceiling(totalPeliculas / 2.0);
+    int chunkSize = (int)Math.Ceiling(totalPeliculas / 4.0);
     List<List<streamingParadigmas.Clases.Juego>> carruseles = new List<List<streamingParadigmas.Clases.Juego>>();
 
     for (int i = 0; i < totalPeliculas; i += chunkSize)
@@ -15,8 +42,24 @@
     }
 }
 <style>
+
+    .juego-jugado{
+        position:fixed;
+        width:auto;
+        height:60px;
+        padding:8px 20px;
+        background:green;
+        color:white;
+        z-index:100;
+        border-radius:15px;
+        bottom:10px;
+        right:10px
+
+    }
+
     .carousel-container {
         width: 90%;
+        position:relative;
         margin: 0 auto;
         overflow-x: auto;
         display: flex;
@@ -25,8 +68,10 @@
         scroll-snap-type: x mandatory;
         padding: 1rem 1rem;
         scrollbar-width: none;
-        background: linear-gradient(to right,rgba(174, 45, 104, 0.0),rgba(174, 45, 104, 0.4), rgba(40, 6, 89, 0.4),rgba(40,6, 89, 0.0));
+        background: linear-gradient(to right,rgba(174, 45, 104, 0.0),rgba(109, 247, 150, 0.3) , rgba(93, 184, 160, 0.3) , rgba(69, 86, 214, 0.5),rgba(174, 45, 104, 0.0));
+       
     }
+   
 
         .carousel-container::-webkit-scrollbar {
             display: none;
@@ -34,14 +79,17 @@
 
     .movie-item {
         flex: 0 0 auto;
-        width: 220px;
+        width: 210px;
         scroll-snap-align: start;
         position: relative;
-        border-radius: 15px;
+        border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.1);
         transition: transform 0.3s ease;
+        
     }
+
+
 
         .movie-item:hover {
             transform: scale(1.05);
@@ -49,7 +97,7 @@
 
     .movie-img {
         width: 100%;
-        height: 330px;
+        height: 300px;
         object-fit: cover;
         display: block;
     }
@@ -60,7 +108,7 @@
         left: 0;
         height: 100%;
         width: 100%;
-        background: linear-gradient(to right, rgba(174, 45, 104, 0.7), rgba(40, 6, 89, 0.7));
+        background: linear-gradient(to right, rgba(109, 247, 150, 0.6), rgba(40, 6, 89, 0.7),rgba(0,0,0,0.7));
         color: #fff;
         display: flex;
         flex-direction: column;
@@ -90,11 +138,12 @@
     h2 {
         text-align: center;
         margin-top: 2rem;
+        font-size:3rem;
+        font-family:Impact;
+        color:lightgreen;
     }
 
-    .title {
-        color: white;
-    }
+    
 
     .mas-boton {
         width: 90px;
@@ -120,6 +169,7 @@
 @for (int i = 0; i < carruseles.Count; i++)
 {
     <div class="carousel-container">
+        
         <h3>Carrusel @i</h3>
         @foreach (var juego in carruseles[i])
         {

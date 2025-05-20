@@ -37,8 +37,8 @@ namespace PARADIGMASFINAL.Controllers
         public IActionResult Registro(string username)
         {
             _pService.AgregarCuenta(username);
-            HttpContext.Session.SetString("cuentaActiva", username);
-            return RedirectToAction("Index");
+            HttpContext.Session.SetString("CuentaSesion", username);
+            return RedirectToAction("Index","Cuentas");
         }
 
         [HttpPost]
@@ -47,10 +47,10 @@ namespace PARADIGMASFINAL.Controllers
             var cuenta = _pService.IniciarSesion(username);
             if (cuenta != null)
             {
-                HttpContext.Session.SetString("cuentaActiva", cuenta.Usuario.Nombre);
+                HttpContext.Session.SetString("CuentaSesion", cuenta.Usuario.Nombre);
             }
 
-            return View();
+            return RedirectToAction("Index","Cuentas");
         }
 
 
