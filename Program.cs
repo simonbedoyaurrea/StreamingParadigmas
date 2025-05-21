@@ -34,14 +34,14 @@ namespace PARADIGMASFINAL
                 
 
 
-                // Agregar juegos
+                // Agregar juegos 
                 var juegosRawg = rawgService.GetJuegosPopularesAsync().GetAwaiter().GetResult();
                 foreach (Juego juego in juegosRawg)
                 {
                     proveedor.AgregarCatalogoJuego(juego);
                 }
 
-                // Agregar películas desde la API
+                // agregar películas desde la api y con el .txt
                 var peliculas = tmdbService.GetPeliculasPopularesAsync().GetAwaiter().GetResult();
                 foreach (var pelicula in peliculas)
                 {
@@ -52,6 +52,7 @@ namespace PARADIGMASFINAL
                     proveedor.AgregarCatalogoContenido(pelicula);
                 }
 
+                //agregar series desde la api
                 var series = tmdbService.GetSeriesPopularesAsync().GetAwaiter().GetResult();
                 foreach (var serie in series)
                 {
