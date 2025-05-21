@@ -15,7 +15,31 @@
         }, 2600);
     </script>
 }
+@if (TempData["CategoriaMensaje"] != null)
+{
+    <div class="alerta-categoria" id="categoriaMsg">
+        @TempData["CategoriaMensaje"]
+    </div>
 
+    <script>
+        setTimeout(function () {
+            document.getElementById('categoriaMsg').style.display = 'none';
+        }, 4000); // desaparece en 4 segundos
+    </script>
+}
+
+@if (TempData["ContenidoVistoMensaje"] != null)
+{
+    <div class="alerta-visto" id="categoriaMsg">
+        @TempData["ContenidoVistoMensaje"]
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('categoriaMsg').style.display = 'none';
+        }, 3000); 
+    </script>
+}
 @{
     ViewData["Title"] = "Películas Populares";
 }
@@ -42,6 +66,33 @@
         scrollbar-width: none;
         background: linear-gradient(to right,rgba(174, 45, 104, 0.0)12%,rgba(174, 45, 104, 0.4), rgba(40, 6, 89, 0.4),rgba(40,6, 89, 0.0));
     }
+
+    .alerta-categoria {
+        position: fixed;
+        width: auto;
+        height: 60px;
+        padding: 8px 20px;
+        background: blue;
+        color: white;
+        z-index: 100;
+        border-radius: 15px;
+        bottom: 10px;
+        left: 10px
+    }
+
+    .alerta-visto{
+        position: fixed;
+        width: auto;
+        height: 60px;
+        padding: 8px 20px;
+        background:violet;
+        color: white;
+        z-index: 100;
+        border-radius: 15px;
+        bottom: 10px;
+        left: 200px
+    }
+
 
     .juego-jugado {
         position: fixed;

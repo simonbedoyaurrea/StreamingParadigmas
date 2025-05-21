@@ -1,8 +1,19 @@
 ﻿@model List<streamingParadigmas.Clases.Serie>
 @using System.Linq
+@if (TempData["CategoriaMensaje"] != null)
+{
+    <div class="alerta-categoria" id="categoriaMsg">
+        @TempData["CategoriaMensaje"]
+    </div>
 
+    <script>
+        setTimeout(function () {
+            document.getElementById('categoriaMsg').style.display = 'none';
+        }, 4000); // desaparece en 4 segundos
+    </script>
+}
 @{
-    ViewData["Title"] = "Películas Populares";
+    ViewData["Title"] = "Series Populares";
 }
 @{
     int totalPeliculas = Model.Count;
@@ -13,6 +24,18 @@
     {
         carruseles.Add(Model.Skip(i).Take(chunkSize).ToList());
     }
+}
+@if (TempData["ContenidoVistoMensaje"] != null)
+{
+    <div class="alerta-visto" id="categoriaMsg">
+        @TempData["ContenidoVistoMensaje"]
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('categoriaMsg').style.display = 'none';
+        }, 3000);
+    </script>
 }
 <style>
     .carousel-container {
@@ -26,6 +49,32 @@
         padding: 1rem 1rem;
         scrollbar-width: none;
         background: linear-gradient(to right,rgba(174, 45, 104, 0.0),rgba(174, 45, 104, 0.4), rgba(40, 6, 89, 0.4),rgba(40,6, 89, 0.0));
+    }
+
+    .alerta-categoria {
+        position: fixed;
+        width: auto;
+        height: 60px;
+        padding: 8px 20px;
+        background: blue;
+        color: white;
+        z-index: 100;
+        border-radius: 15px;
+        bottom: 10px;
+        left: 10px
+    }
+
+    .alerta-visto {
+        position: fixed;
+        width: auto;
+        height: 60px;
+        padding: 8px 20px;
+        background: blue;
+        color: white;
+        z-index: 100;
+        border-radius: 15px;
+        bottom: 10px;
+        left: 10px
     }
 
         .carousel-container::-webkit-scrollbar {

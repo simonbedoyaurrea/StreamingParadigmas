@@ -1,5 +1,6 @@
 ﻿@model List<streamingParadigmas.Clases.Juego>
 @using System.Linq
+
 @if (TempData["Mensaje"] != null)
 {
     <div id="mensaje-alerta" class="juego-jugado">
@@ -19,6 +20,18 @@
 {
     <div class="alerta-categoria" id="categoriaMsg">
         @TempData["CategoriaMensaje"]
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('categoriaMsg').style.display = 'none';
+        }, 4000); // desaparece en 4 segundos
+    </script>
+}
+@if (TempData["RecordMensaje"] != null)
+{
+    <div class="alerta-Record" id="categoriaMsg">
+        @TempData["RecordMensaje"]
     </div>
 
     <script>
@@ -55,6 +68,32 @@
         bottom:10px;
         right:10px
 
+    }
+
+    .alerta-Record {
+        position: fixed;
+        width: auto;
+        height: 60px;
+        padding: 8px 20px;
+        background: gold;
+        color: black;
+        z-index: 100;
+        border-radius: 15px;
+        bottom: 100px;
+        right: 10px
+    }
+
+    .alerta-categoria{
+        position: fixed;
+        width: auto;
+        height: 60px;
+        padding: 8px 20px;
+        background: blue;
+        color: white;
+        z-index: 100;
+        border-radius: 15px;
+        bottom: 10px;
+        left : 10px
     }
 
     .carousel-container {

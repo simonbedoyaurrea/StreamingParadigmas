@@ -62,6 +62,16 @@ namespace PARADIGMASFINAL.Controllers
             if (!string.IsNullOrEmpty(cuentaEncontrada.NotificacionCategoria))
             {
                 TempData["CategoriaMensaje"] = cuentaEncontrada.NotificacionCategoria;
+                cuentaEncontrada.NotificacionCategoria = null;  
+
+
+            }
+            if (!string.IsNullOrEmpty(cuentaEncontrada.NotificacionRecordRoto))
+            {
+                TempData["RecordMensaje"] = cuentaEncontrada.NotificacionRecordRoto;
+                cuentaEncontrada.NotificacionRecordRoto = null;
+
+
             }
 
             return RedirectToAction("Index", "Juegos");
@@ -94,6 +104,12 @@ namespace PARADIGMASFINAL.Controllers
             if (!string.IsNullOrEmpty(cuentaEncontrada.NotificacionCategoria))
             {
                 TempData["CategoriaMensaje"] = cuentaEncontrada.NotificacionCategoria;
+                cuentaEncontrada.NotificacionCategoria = null;
+            }
+            if (!string.IsNullOrEmpty(cuentaEncontrada.NotificacionContenidoVisto))
+            {
+                TempData["ContenidoVistoMensaje"] = cuentaEncontrada.NotificacionContenidoVisto;
+                cuentaEncontrada.NotificacionContenidoVisto = null;
             }
 
             if (contenidoEncontrado is Pelicula)

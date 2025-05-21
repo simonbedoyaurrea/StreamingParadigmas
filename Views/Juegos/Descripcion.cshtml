@@ -226,6 +226,7 @@
         <h1 class="movie-title">@Model.Nombre</h1>
         <div class="rating-circle">@Model.Calificacion</div>
         <p class="movie-description">Genero: @Model.Genero </p>
+        <p class="movie-description">Record: @Model.ScoreRecord</p>
         <form asp-action="JugarJuego" asp-controller="Cuentas" method="post">
             <input type="hidden" name="juego" value="@Model.Nombre" />
             <button class="ver-button" type="submit">JUGAR <i class="fa-solid fa-gamepad"></i></button>

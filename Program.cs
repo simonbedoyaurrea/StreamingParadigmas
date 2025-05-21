@@ -1,3 +1,5 @@
+using Castle.DynamicProxy;
+using PARADIGMASFINAL.Aspectos;
 using PARADIGMASFINAL.Services;
 using streamingParadigmas.Clases;
 
@@ -18,6 +20,18 @@ namespace PARADIGMASFINAL
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddMemoryCache();
             builder.Services.AddSession();
+
+            //// Interceptor
+            //builder.Services.AddSingleton<LoginInterceptor>();
+
+            //// Servicio proxy con Castle
+            //builder.Services.AddSingleton<IProveedorService>(provider =>
+            //{
+            //    var proxyGenerator = new ProxyGenerator();
+            //    var interceptor = provider.GetRequiredService<LoginInterceptor>();
+            //    var realService = new ProveedorService();
+            //    return proxyGenerator.CreateInterfaceProxyWithTarget<IProveedorService>(realService, interceptor);
+            //});
 
             var app = builder.Build();
 
